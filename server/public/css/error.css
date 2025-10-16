@@ -1,0 +1,19 @@
+  body{
+    display: flex;
+    flex-direction: column;
+    
+  }
+    h1 {
+      font-size: 4rem;
+      color: #ff5252;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 1.4rem;
+      color: #aaa;
+    }
+    
+.error-container {
+  text-align: center;
+  
+}

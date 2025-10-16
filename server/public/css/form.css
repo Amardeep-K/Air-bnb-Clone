@@ -1,0 +1,80 @@
+/* General styles */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f8f9fa, #e3f2fd);
+ 
+}
+
+/* Container */
+.form-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #ffffff; /* Airbnb clean white */
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  font-family: 'Arial', sans-serif;
+}
+
+/* Headings */
+.form-container h2 {
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+  color: #222222; /* dark text */
+  text-align: center;
+}
+
+/* Labels */
+.form-container label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #484848; /* soft dark grey */
+}
+
+/* Inputs and textarea */
+.form-container input,
+.form-container textarea {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.form-container input:focus,
+.form-container textarea:focus {
+  border-color: #ff5a5f; /* Airbnb red accent */
+  box-shadow: 0 0 0 2px rgba(255, 90, 95, 0.2);
+  outline: none;
+}
+
+/* Textarea specific */
+.form-container textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Button */
+.form-container button {
+  width: 100%;
+  padding: 12px 0;
+  background-color: #ff5a5f; /* Airbnb primary red */
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.form-container button:hover {
+  background-color: #e0484d;
+}
+.form-container button:active {
+  background-color: #c0393e;
+}

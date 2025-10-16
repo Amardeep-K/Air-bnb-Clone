@@ -1,0 +1,16 @@
+<% layout("layouts/boilerplate") %> 
+   <Section class="grid lg:grid-cols-3  gap-4">
+     <% listings.forEach(listing => { %>
+    <a href="/<%=listing._id%>"><div class="card" >
+  <img src="<%=listing.image.url %>" class="card-img-top" alt="...">
+  <div class="card-body">
+    <p href="http://localhost:3000/<%=listing._id %>" class="card-title"><%= listing.title %></p>
+    <p class="card-text"><%= listing.description %><br> <strong> &#8377;<%= listing.price.toLocaleString("en-IN") %></strong> </p>
+  
+  </div>
+</div> </a> 
+    <% }) %>
+   </Section>
+ 
+   
+    

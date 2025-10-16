@@ -1,0 +1,40 @@
+<% layout("layouts/boilerplate") %> 
+<link rel="stylesheet" href="/css/form.css">
+  <div class="form-container">
+    <h2>Update your listing</h2>
+    <form action="/listings/<%= listing._id %>?_method=PUT" method="POST" class="needs-validation" novalidate>
+      
+      <label for="title">Title</label>
+      <input type="text" id="title" name="listing[title]" value="<%= listing.title %>" placeholder="Enter listing title" required>
+      <div class="invalid-feedback">
+      Invalid Input
+    </div>
+      <label for="description">Description</label>
+      <textarea id="description" name="listing[description]" placeholder="Describe your listing" required> <%= listing.description %></textarea>
+      <div class="invalid-feedback">
+      Invalid Input
+    </div>
+      <label for="image">Image URL</label>
+      <input type="text" id="image" name="listing[image]" value="<%= listing.image.url %>" placeholder="https://example.com/image.jpg" required>
+      <div class="invalid-feedback">
+      Invalid Input
+    </div>
+      <label for="price">Price (₹)</label>
+      <input type="number" id="price" name="listing[price]" value="<%= listing.price %>" placeholder="Enter price in INR" required>
+      <div class="invalid-feedback">
+      Invalid Input
+    </div>
+      <label for="location">Location</label>
+      <input type="text" id="location" name="listing[location]" value="<%= listing.location %>" placeholder="City, State" required>
+      <div class="invalid-feedback">
+      Invalid Input
+    </div>
+      <label for="country">Country</label>
+      <input type="text" id="country" name="listing[country]" value="<%= listing.country %>" placeholder="Enter country" required>
+      <div class="invalid-feedback">
+      Invalid Input
+    </div>
+      <button type="submit">Edit</button>
+    </form>
+  </div>
+

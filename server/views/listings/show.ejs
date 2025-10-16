@@ -1,0 +1,74 @@
+<% layout("layouts/boilerplate") %> 
+   
+
+  <!-- Title -->
+  <div class="max-w-5xl mx-auto px-4 py-6">
+    <h2 class="text-2xl font-semibold"><%= listing.title %></h2>
+  </div>
+
+  <!-- Gallery -->
+  <div class="max-w-5xl mx-auto px-2 mb-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+      <!-- Big image -->
+      <div>
+        <img src="<%= listing.image.url %>" class="w-full h-full object-cover rounded-xl" alt="Main">
+      </div>
+
+      <!-- Small images grid -->
+      <div class="grid grid-cols-2 gap-2">
+        <img src="<%= listing.image.url %>" class="rounded-xl object-cover w-full h-full">
+        <img src="<%= listing.image.url %>" class="rounded-xl object-cover w-full h-full">
+        <img src="<%= listing.image.url %>" class="rounded-xl object-cover w-full h-full">
+        <div class="relative">
+          <img src="<%= listing.image.url %>" class="rounded-xl object-cover w-full h-full">
+          <!-- <button class="absolute bottom-2 right-2 bg-white px-3 py-1 rounded-lg shadow text-sm font-medium">
+            Show all photos
+          </button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Info Row -->
+  <div class="max-w-5xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6">
+    
+    <!-- Left content -->
+    <div class="md:col-span-2">
+      <h5 class="text-lg font-medium"><%= listing.location %>, <%= listing.country %></h5>
+      <p class="text-gray-600">4 guests · 1 bedroom · 1 bed · 1 bathroom</p>
+
+      <div class="flex gap-4 my-4">
+        <div class=" rounded-xl px-1 py-1  text-sm">
+         <%= listing.description %>
+        </div>
+       
+      </div>
+    </div>
+
+    <!-- Right price box -->
+    <div>
+      <div class="border rounded-xl p-5 shadow-md sticky top-20">
+        <p class="text-pink-600 font-medium mb-2">Rare find! This place is usually booked</p>
+        <h4 class="text-xl font-semibold"><%= listing.price %> <span class="text-gray-500 font-normal text-sm text-base"> for 2 nights</span></h4>
+        <button class="mt-4 w-full bg-pink-600 hover:bg-pink-700 text-white py-2 rounded-lg font-medium">
+          Reserve
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Reviews and actions -->
+   <div class="rows">
+   <div class="border rounded-xl px-4 py-2 text-center cols-6">
+          <p class="font-semibold">4.85</p>
+          <p class="text-sm text-gray-500">481 Reviews</p>
+        </div>
+    </div>
+
+<div class=" flex gap-4 my-4">
+    <form action="/<%= listing._id %>/edit" method="GET">
+        <button  class="bg-[#ff385c]  px-3 py-2 text-white" type="submit">Edit </button>
+    </form>
+    <form action="/<%= listing._id %>?_method=DELETE" method="POST">
+        <button class="bg-[#ff385c] rounded-lg px-3 py-2 text-white" type="submit">Delete</button>
+    </form>
+</div>

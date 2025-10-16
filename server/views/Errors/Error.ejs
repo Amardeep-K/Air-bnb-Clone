@@ -1,0 +1,8 @@
+ <% layout("layouts/boilerplate") %> 
+ <link rel="stylesheet" href="/css/error.css">
+ <div class="error-container">
+  <h1>OOPS!</h1>
+ <h2><%= err.statusCode %></h2>
+  <p><%= err.message %></p>
+  <a href="/">Back Home</a>
+ </div>
