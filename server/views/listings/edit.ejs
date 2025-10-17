@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="/css/form.css">
   <div class="form-container">
     <h2>Update your listing</h2>
-    <form action="/listings/<%= listing._id %>?_method=PUT" method="POST" class="needs-validation" novalidate>
+    <form action="/<%= listing._id %>?_method=PUT" method="POST" class="needs-validation" novalidate>
       
       <label for="title">Title</label>
       <input type="text" id="title" name="listing[title]" value="<%= listing.title %>" placeholder="Enter listing title" required>

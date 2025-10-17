@@ -7,6 +7,7 @@ import {listingRouter} from "./routes/listing.route.js";
 import methodOverride from "method-override";
 import ejsmate from "ejs-mate";
 import { ExpressError } from "./utils/ExpressError.js";
+import { wrapAsync } from "./utils/wrapAsync.js";
 
 const app = express();
 const PORT = 3000;
