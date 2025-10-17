@@ -1,7 +1,9 @@
 import express from "express";
+import mongoose from "mongoose";
 import { Listing } from "../models/listing.model.js";
 import { wrapAsync } from "../utils/wrapAsync.js";
-import { validationMiddleware } from "../middlewares/validate.js";
+import { validationListingMiddleware ,validationReviewMiddleware } from "../middlewares/validate.js";
+import { Review } from "../models/review.model.js";
 
 export const listingRouter = express.Router();
  listingRouter.get("/", async (req, res) => {
@@ -19,29 +21,35 @@ export const listingRouter = express.Router();
  }));
  // Show details of a specific listing
  listingRouter.get("/:id", async (req, res) => {
-    const {id} = req.params;
-    const listing = await Listing.findById(id);
+    
+   const listing = await Listing.findById(req.params.id).populate("reviews").exec();
+
+  if (!listing) {
+    return res.status(404).send("Listing not found");
+  }
+
    res.render("listings/show.ejs", {listing});
 
 
  });
  // Create a route to handle form submission
-  listingRouter.post("/", validationMiddleware, wrapAsync(async (req, res) => {
-   
-   const { title, description, price, location, imageUrl, country } = req.body;
-    const newlisting = new Listing({
-        title,
-        description,
-        price,
-        location
-        ,imageUrl,
-        country
-      }); 
-       newlisting.save();
-    res.redirect("/");
+   listingRouter.post("/create",validationListingMiddleware, wrapAsync(async (req, res) => {
+      const { listing } = req.body;
+      console.log("Received request");
 
+      // Spread the fields from the nested listing object
+      const newListing = new Listing({ ...listing });
+      console.log("Received request 2");
 
- }));
+      // Await saving to DB
+      await newListing.save();
+      console.log("Received request 3");
+
+      // Redirect back to homepage after successful save
+
+      res.redirect("/");
+   })
+   );
 
     // Render form to edit an existing listing
  listingRouter.get("/:id/edit", async (req, res) => {
@@ -53,7 +61,7 @@ export const listingRouter = express.Router();
  });
 
 // Route to handle the update form submission
- listingRouter.get("/:id", async (req, res) => {
+ listingRouter.put("/:id", async (req, res) => {
     const {id} = req.params;
     await Listing.findByIdAndUpdate(id , {...req.body.listing});
    res.redirect(`/${id}`);
@@ -66,6 +74,21 @@ listingRouter.delete("/:id", async (req, res) => {
     await Listing.findByIdAndDelete(id);
    res.redirect("/");
 });
+
+
+
+// Reviews routes 
+listingRouter.post("/:id/reviews", validationReviewMiddleware, wrapAsync(async (req, res) => {
+      const { id } = req.params;
+      const listing = await Listing.findById(id);
+      const newReview = new Review(req.body.review);   
+      await newReview.save();
+      listing.reviews.push(newReview);
+     await listing.save();
+      console.log("added successfully");
+
+      res.redirect(`/${id}`);
+}));
 
 
  

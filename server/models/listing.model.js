@@ -1,4 +1,3 @@
-import { countReset } from "console";
 import mongoose, { set } from "mongoose";
  const listingSchema = new mongoose.Schema({
 title:{
@@ -29,6 +28,11 @@ image:
 country:{
     type: String,
     required: true
-}
+},
+reviews:[{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Review"
+    
+}],
  });
     export const Listing = mongoose.model("Listing", listingSchema);

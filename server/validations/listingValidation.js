@@ -9,7 +9,7 @@ const listingValidation = Joi.object({
   country: Joi.string().required(),
   image: Joi.object({
     filename: Joi.string().allow(null, ""),
-    url: Joi.string().uri().allow(null, ""),
+    url: Joi.string().allow(null, ""),
   })
 
   }).required()
