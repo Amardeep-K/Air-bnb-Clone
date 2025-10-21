@@ -1,4 +1,5 @@
 import mongoose, { set } from "mongoose";
+import { Review } from "./review.model.js";
  const listingSchema = new mongoose.Schema({
 title:{
     type: String,
@@ -35,4 +36,11 @@ reviews:[{
     
 }],
  });
+ listingSchema.post("findOneAndDelete", async(listing)=> {
+    if (listing) {
+        await Review.deleteMany({ _id: { $in: listing.reviews } });
+    }  
+    console.log("Deleted associated reviews for listing:", listing.title);
+ });
+ 
     export const Listing = mongoose.model("Listing", listingSchema);

@@ -78,17 +78,6 @@ listingRouter.delete("/:id", async (req, res) => {
 
 
 // Reviews routes 
-listingRouter.post("/:id/reviews", validationReviewMiddleware, wrapAsync(async (req, res) => {
-      const { id } = req.params;
-      const listing = await Listing.findById(id);
-      const newReview = new Review(req.body.review);   
-      await newReview.save();
-      listing.reviews.push(newReview);
-     await listing.save();
-      console.log("added successfully");
-
-      res.redirect(`/${id}`);
-}));
 
 
  

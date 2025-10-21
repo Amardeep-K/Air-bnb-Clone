@@ -7,7 +7,8 @@ import {listingRouter} from "./routes/listing.route.js";
 import methodOverride from "method-override";
 import ejsmate from "ejs-mate";
 import { ExpressError } from "./utils/ExpressError.js";
-import { wrapAsync } from "./utils/wrapAsync.js";
+
+import { reviewRouter } from "./routes/reviews.route.js";
 
 const app = express();
 const PORT = 3000;
@@ -27,7 +28,8 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 // Routes
 app.use("/",listingRouter);
-console.log("http://localhost:3000/listings");
+app.use("/:listingId/reviews", reviewRouter);
+console.log("http://localhost:3000/");
 
 app.all(/.*/, (req, res, next) => {
   next(new ExpressError("Page Not Found", 404));
