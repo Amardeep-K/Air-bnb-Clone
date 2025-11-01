@@ -1,0 +1,41 @@
+<% layout("layouts/boilerplate") %> 
+<div class="max-w-md mx-auto bg-white p-6 rounded-2xl shadow-lg">
+  <h2 class="text-center text-2xl font-semibold text-blue-600 mb-4">Login</h2>
+
+  <form action="/authentication/login" method="POST" class="needs-validation" novalidate>
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Username</label>
+      <input 
+        type="text"
+        class="form-control border border-gray-300 rounded-md"
+        name="username"
+        placeholder="Enter username"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Password</label>
+      <input
+        type="password"
+        class="form-control border border-gray-300 rounded-md"
+        name="password"
+        placeholder="Enter password"
+        required
+      />
+    </div>
+
+    <button
+      type="submit"
+      class="btn w-100 bg-[#ff385c]! border-[#ff385c]! border-2! text-white! py-1.4!  px-5! rounded-full"
+    >
+      Login
+    </button>
+
+    <p class="text-center mt-3 text-sm">
+      Don’t have an account?
+      <a href="/authentication/register" class="text-blue-600 hover:underline">Register</a>
+    </p>
+    <a class="button google" href="/login/federated/google">Sign in with Google</a>
+  </form>
+</div>

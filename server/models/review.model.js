@@ -1,11 +1,7 @@
 import mongoose from "mongoose";
 
 const reviewSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    trim: true
-  },
+ 
   comment: {
     type: String,
     required: true,
@@ -21,7 +17,11 @@ const reviewSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Listing",
     required: true
-  }]
+  }],
+  author:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  }
 }, { timestamps: true });
 
 export const Review = mongoose.model("Review", reviewSchema);

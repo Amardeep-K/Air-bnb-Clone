@@ -1,5 +1,6 @@
-import mongoose, { set } from "mongoose";
+import mongoose, { mongo, set } from "mongoose";
 import { Review } from "./review.model.js";
+
  const listingSchema = new mongoose.Schema({
 title:{
     type: String,
@@ -35,6 +36,10 @@ reviews:[{
     ref: "Review"
     
 }],
+admin:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
+}
  });
  listingSchema.post("findOneAndDelete", async(listing)=> {
     if (listing) {

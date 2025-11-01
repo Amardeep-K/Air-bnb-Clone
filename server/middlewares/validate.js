@@ -1,6 +1,5 @@
 import listingValidation from "../validations/listingValidation.js";
 import reviewValidation from "../validations/reviewValidation.js";
-import { Listing } from "../models/listing.model.js";
 import { ExpressError } from "../utils/ExpressError.js";
 export const validationListingMiddleware = (req, res, next) => {
     const {error} = listingValidation.validate(req.body);

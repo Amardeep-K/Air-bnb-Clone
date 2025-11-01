@@ -15,6 +15,23 @@
         <li class="nav-item"><a class="nav-link text-black" href="/">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="/create">Add Listing</a></li>
       </ul>
+      <div class="navbar-btn flex gap-2 ms-3 d-flex items-center">
+      <% if (!currentUser) { %>
+      <form action="/authentication/login" method="get">
+        <button  class="text-black bg-[#ff385c]! border-[#ff385c]! border-2! text-white! py-1.4!  px-5! rounded-full" type="submit">Login</button>
+      </form>
+      <form action="/authentication/register" method="get">
+        <button  class="text-black border-[#ff385c]! border-2! text-[#ff385c]! py-1.4! px-5! rounded-full" type="submit">Sign in</button>
+      </form>
+      <% } %>
+      <% if (currentUser) { %>
+        <span class="navbar-text me-2">Welcome, <%= currentUser.username %>!</span>
+      <form action="/authentication/logout" method="get">
+        <button  class="text-black border-[#ff385c]! border-2! text-[#ff385c]! py-1.4! px-5! rounded-full" type="submit">Logout</button>
+      </form>
+      <% } %>
+      
+      </div>
     </div>
   </div>
 </nav>
