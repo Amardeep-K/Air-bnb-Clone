@@ -1,5 +1,6 @@
 import { Listing } from "../models/listing.model.js";
 import { Review } from "../models/review.model.js";
+import { validationListingMiddleware ,validationReviewMiddleware } from "../middlewares/validate.js";
 import mongoose from "mongoose";
 export const  allListings = async (req, res) => {
    req.session.name="Amar";

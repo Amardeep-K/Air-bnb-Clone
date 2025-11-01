@@ -5,25 +5,35 @@ import { allListings, createListingForm, destroyListing, editListingForm, handle
 import { validationListingMiddleware ,validationReviewMiddleware } from "../middlewares/validate.js";
 
 export const listingRouter = express.Router();
+// Route to get all listings
  listingRouter.get("/",allListings);
 
- // Render form to create a new listing
-  listingRouter.get("/create",isLoggedIn, wrapAsync(createListingForm));
 
- // Show details of a specific listing
- listingRouter.get("/:id", wrapAsync(showListing));
+ // Route to show details of a specific listing
+ listingRouter.route("/:id")
+
+              // Show details of a specific listing
+              .get(wrapAsync(showListing))
+
+              // Route to handle the update form submission
+              .put(isLoggedIn,isCreater, wrapAsync( handleEditListing))
+
+                //Route to handle deletion
+              .delete(isLoggedIn,isCreater, wrapAsync(destroyListing));
 
  // Create a route to handle form submission
- listingRouter.post("/create", validationListingMiddleware, wrapAsync(handleCreateListing));
+ listingRouter.route("/create")
+
+            // Render form to create a new listing
+            .get(isLoggedIn, wrapAsync(createListingForm))
+            
+            // Handle form submission to create a new listing
+            .post( validationListingMiddleware, wrapAsync(handleCreateListing))
 
   // Render form to edit an existing listing
  listingRouter.get("/:id/edit", isLoggedIn, isCreater,  wrapAsync (editListingForm));
 
-// Route to handle the update form submission
- listingRouter.put("/:id",isLoggedIn,isCreater, wrapAsync( handleEditListing));
 
-  //Route to handle deletion
-listingRouter.delete("/:id",isLoggedIn,isCreater, wrapAsync(destroyListing));
 
 
  

@@ -7,17 +7,19 @@ import { renderloginForm, renderRegisterForm, handleRegisterForm, handleLoginFor
 
 export const authenticationRouter = express.Router({mergeParams: true});
 
-// Render  forms
-authenticationRouter.get('/login',renderloginForm ); 
-authenticationRouter.get('/register',renderRegisterForm ); 
+// Login routes
+authenticationRouter.route('/login')
+                     // Render  forms
+                    .get(renderloginForm )
+                    // Handle login form submission
+                    .post(storeReturnTo, passport.authenticate('local',{failureRedirect:'/authentication/login', failureFlash:true }), handleLoginForm ); 
 
-
-// Handle registration form submission
-authenticationRouter.post('/register', storeReturnTo, wrapAsync(handleRegisterForm));
- 
-
-// Handle login form submission
-authenticationRouter.post('/login', storeReturnTo, passport.authenticate('local',{failureRedirect:'/authentication/login', failureFlash:true }), handleLoginForm );
+// Registration routes
+authenticationRouter.route('/register')
+                    // Render registration form
+                    .get(renderRegisterForm )
+                    // Handle registration form submission
+                    .post( storeReturnTo, wrapAsync(handleRegisterForm)); 
 
 // Handle logout
 authenticationRouter.get('/logout', storeReturnTo, handleLogout );
