@@ -2,6 +2,7 @@ import { Listing } from "../models/listing.model.js";
 import { Review } from "../models/review.model.js";
 import { validationListingMiddleware ,validationReviewMiddleware } from "../middlewares/validate.js";
 import mongoose from "mongoose";
+
 export const  allListings = async (req, res) => {
    req.session.name="Amar";
     const listings = await Listing.find();
@@ -19,6 +20,11 @@ export const createListingForm = async (req, res) => {
        // Spread the fields from the nested listing object
        const newListing = new Listing({ ...listing });
        newListing.admin = req.user._id;
+        if (req.file) {
+          newListing.image = {
+            filename: req.file.filename,
+            url: req.file.path,
+          };
      
        // Await saving to DB
        await newListing.save();
@@ -29,6 +35,8 @@ export const createListingForm = async (req, res) => {
  
        res.redirect("/");
     }
+  }
+
  export const showListing = async (req, res) => {
      
     const listing = await Listing.findById(req.params.id).populate({
